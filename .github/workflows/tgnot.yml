@@ -1,0 +1,26 @@
+name: Pull request Notife
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  telegram-notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositore
+        uses: actions/checkout@v2
+
+      - name: Install python
+        run: | 
+          sudo apt-get update
+          sudo apt-get install python3 python3-pip -y
+          pip3 install pytelegrambotapi
+
+      - name: Send Notification
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: | 
+          python3 tg_bot.py
