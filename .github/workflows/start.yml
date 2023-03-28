@@ -17,4 +17,4 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python3 manage.py test
+        python3 actions/manage.py test
